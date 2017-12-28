@@ -4,19 +4,19 @@ using TextualAutocomplete.Output;
 
 namespace TextualAutocomplete
 {
-    internal class CommandProcessor
+    internal class TextProcessor
     {
         private readonly IOutput _Output;
         private readonly IAutoCompleteProvider _Provider;
         private readonly IFormatter _Formatter;
 
         /// <summary>
-        /// Processes commands for auto-completion.
+        /// Processes text-commands for auto-completion.
         /// </summary>
         /// <param name="provider"></param>
         /// <param name="output"></param>
         /// <param name="formatter"></param>
-        public CommandProcessor(IAutoCompleteProvider provider = null, IOutput output = null, IFormatter formatter = null)
+        public TextProcessor(IAutoCompleteProvider provider = null, IOutput output = null, IFormatter formatter = null)
         {
             _Provider = provider ?? new AutoCompleteProvider(new Trie<string>());
             _Output = output ?? new CommandLineOutput();

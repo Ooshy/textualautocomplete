@@ -12,7 +12,7 @@ namespace TextualAutocomplete
             //IOutput output = new CommandLineOutput();                                      // is the default option for command processor, so is optional parameter
             //IFormatter textFormatter = new TextFormatter();                                // is the default option for command processor, so is optional parameter
 
-            var processor = new CommandProcessor(); // inject command-line output / formatters
+            var processor = new TextProcessor(); // inject command-line output / formatters
 
             //processor.Process("train: training data to train for training");
             //processor.Process("input: train");
