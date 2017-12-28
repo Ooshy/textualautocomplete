@@ -42,13 +42,13 @@ namespace TextualAutocomplete
 
             if (input.StartsWith(TextCommands.Train, StringComparison.CurrentCultureIgnoreCase))
             {
-                var passage = input.Substring(TextCommands.Train.Length);
+                var passage = input.Substring(TextCommands.Train.Length).ToLowerInvariant();
                 _Provider.Train(passage);
                 _Output.WriteLine(_Formatter.FormatTraining(passage));
             }
             else if (input.StartsWith(TextCommands.Input, StringComparison.CurrentCultureIgnoreCase))
             {
-                var fragment = input.Substring(TextCommands.Input.Length).Trim();
+                var fragment = input.Substring(TextCommands.Input.Length).Trim().ToLowerInvariant();
                 _Output.WriteLine(_Formatter.FormatGetWords(fragment, _Provider.GetWords(fragment)));
             }
             else if (input == "Quit")
