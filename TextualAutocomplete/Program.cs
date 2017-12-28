@@ -8,11 +8,14 @@ namespace TextualAutocomplete
     {
         static void Main(string[] args)
         {
-            IAutoCompleteProvider provider = new AutoCompleteProvider(new Trie<string>()); // inject trie implementation
+            //IAutoCompleteProvider provider = new AutoCompleteProvider(new Trie<string>()); // is the default option for command processor, so is optional parameter
+            //IOutput output = new CommandLineOutput();                                      // is the default option for command processor, so is optional parameter
+            //IFormatter textFormatter = new TextFormatter();                                // is the default option for command processor, so is optional parameter
 
-            IFormatter textFormatter = new TextFormatter();
+            var processor = new CommandProcessor(); // inject command-line output / formatters
 
-            var processor = new CommandProcessor(provider, new CommandLineOutput(), textFormatter); // inject command-line output / formatters
+            processor.Process("train: training data to train for training");
+            processor.Process("input: train");
 
             for (;;)
             {
