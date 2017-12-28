@@ -17,6 +17,6 @@ namespace TextualAutocomplete.Output
     {
         string IFormatter.FormatGetWords(string fragment, IEnumerable<Candidate> collection) => $"Input: \"{fragment}\" --> {string.Join(", ", collection.OrderByDescending(c => c.Confidence).Select(item => $"\"{item.Word}\" ({item.Confidence})"))}";
 
-        string IFormatter.FormatTraining(string passage) => $"Train: {passage}";
+        string IFormatter.FormatTraining(string passage) => $"Train: \"{passage}\"";
     }
 }
