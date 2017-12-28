@@ -23,7 +23,7 @@ namespace TextualAutocomplete
         /// <returns></returns>
         internal IList<Candidate> GetWords(string fragment)
         {
-            return _Storage.GetByPrefix(fragment.Trim()).Select(word => new Candidate(word.Value, word.Count)).ToList();
+            return _Storage.GetByPrefix(fragment).Select(word => new Candidate(word.Value, word.Count)).ToList();
         }
 
 

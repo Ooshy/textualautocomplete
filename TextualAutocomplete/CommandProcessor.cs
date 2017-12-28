@@ -37,6 +37,9 @@ namespace TextualAutocomplete
         /// <returns>true when program should continue to receive input; false to terminate</returns>
         internal bool Process(string input)
         {
+            if (input == null)
+                return false; // error
+
             if (input.StartsWith(TextCommands.Train, StringComparison.CurrentCultureIgnoreCase))
             {
                 var passage = input.Substring(TextCommands.Train.Length);
@@ -45,7 +48,7 @@ namespace TextualAutocomplete
             }
             else if (input.StartsWith(TextCommands.Input, StringComparison.CurrentCultureIgnoreCase))
             {
-                var fragment = input.Substring(TextCommands.Input.Length);
+                var fragment = input.Substring(TextCommands.Input.Length).Trim();
                 _Output.WriteLine(_Formatter.FormatGetWords(fragment, _Provider.GetWords(fragment)));
             }
             else if (input == "Quit")
