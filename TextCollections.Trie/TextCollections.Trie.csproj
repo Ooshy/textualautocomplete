@@ -1,13 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TextCollections.ITrie\TextCollections.ITrie.csproj" />
-    <ProjectReference Include="..\TextCollections.Trie\TextCollections.Trie.csproj" />
   </ItemGroup>
 
 </Project>
