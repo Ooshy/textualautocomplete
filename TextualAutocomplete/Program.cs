@@ -25,7 +25,8 @@ namespace TextualAutocomplete
                     break;
             }
 
-            Console.WriteLine("Have a nice day.");
+            Console.WriteLine("Have a nice day. Enter to close window.");
+            Console.ReadKey();
         }
     }
 }
