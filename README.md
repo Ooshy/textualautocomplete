@@ -1,4 +1,5 @@
 # Textual Auto-Complete
+![alt text](https://blairleduc.gallerycdn.vsassets.io/extensions/blairleduc/net-core-starters-pack/1.0.0/1510457372304/Microsoft.VisualStudio.Services.Icons.Default "dot net core project")
 
 Textual Auto-Complete is an efficient, tiny library for auto-completing words.
 
