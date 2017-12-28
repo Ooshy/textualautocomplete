@@ -19,11 +19,11 @@ namespace TextualAutocomplete
         /// <summary>
         /// Returns a list of auto-complete matches and partial matches.
         /// </summary>
-        /// <param name="fragment">the prefix of the word to search for</param>
+        /// <param name="fragment">the prefix of the word to search for. will be trimmed</param>
         /// <returns></returns>
         internal IList<Candidate> GetWords(string fragment)
         {
-            return _Storage.GetByPrefix(fragment).Select(word => new Candidate(word.Value, word.Count)).ToList();
+            return _Storage.GetByPrefix(fragment.Trim()).Select(word => new Candidate(word.Value, word.Count)).ToList();
         }
 
 
@@ -34,10 +34,12 @@ namespace TextualAutocomplete
         internal void Train(string passage)
         {
             var words = passage.Split(null /* whitespace */)
+                               .Where(word => !string.IsNullOrWhiteSpace(word))
                                .Select(word =>
                                {
                                    var removedPunctuation = Regex.Replace(word, "\\p{P}+", ""); // remove punctuation from each word
-                                   return (ITrieNode<string>)(new TrieNode<string>(removedPunctuation, removedPunctuation));
+                                   var trimmed = removedPunctuation.Trim();
+                                   return (ITrieNode<string>)(new TrieNode<string>(trimmed, trimmed));
                                });
 
             _Storage.AddRange(words);
