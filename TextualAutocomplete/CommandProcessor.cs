@@ -6,7 +6,7 @@ namespace TextualAutocomplete
     internal class CommandProcessor
     {
         private readonly IOutput _Output;
-        private readonly AutoCompleteProvider _Provider;
+        private readonly IAutoCompleteProvider _Provider;
         private readonly IFormatter _Formatter;
 
         /// <summary>
@@ -15,7 +15,7 @@ namespace TextualAutocomplete
         /// <param name="provider"></param>
         /// <param name="output"></param>
         /// <param name="formatter"></param>
-        public CommandProcessor(AutoCompleteProvider provider, IOutput output, TextFormatter formatter = null)
+        public CommandProcessor(IAutoCompleteProvider provider, IOutput output, IFormatter formatter = null)
         {
             if ((_Provider = provider) == null)
                 throw new ArgumentNullException($"{nameof(provider)} is null.");

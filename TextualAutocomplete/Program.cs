@@ -8,9 +8,9 @@ namespace TextualAutocomplete
     {
         static void Main(string[] args)
         {
-            var provider = new AutoCompleteProvider(new Trie<string>()); // inject trie implementation
+            IAutoCompleteProvider provider = new AutoCompleteProvider(new Trie<string>()); // inject trie implementation
 
-            var textFormatter = new TextFormatter();
+            IFormatter textFormatter = new TextFormatter();
 
             var processor = new CommandProcessor(provider, new CommandLineOutput(), textFormatter); // inject command-line output / formatters
 

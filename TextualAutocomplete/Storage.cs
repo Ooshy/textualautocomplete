@@ -6,7 +6,13 @@ using TextCollections.ITrie;
 
 namespace TextualAutocomplete
 {
-    internal class AutoCompleteProvider
+    internal interface IAutoCompleteProvider
+    {
+        IList<Candidate> GetWords(string fragment);
+        void Train(string passage);
+    }
+
+    internal class AutoCompleteProvider : IAutoCompleteProvider
     {
         private readonly ITrie<string> _Storage;
 
@@ -21,7 +27,7 @@ namespace TextualAutocomplete
         /// </summary>
         /// <param name="fragment">the prefix of the word to search for. will be trimmed</param>
         /// <returns></returns>
-        internal IList<Candidate> GetWords(string fragment)
+        IList<Candidate> IAutoCompleteProvider.GetWords(string fragment)
         {
             return _Storage.GetByPrefix(fragment).Select(word => new Candidate(word.Value, word.Count)).ToList();
         }
@@ -31,7 +37,7 @@ namespace TextualAutocomplete
         /// Words to train the auto-complete engine on.
         /// </summary>
         /// <param name="passage"></param>
-        internal void Train(string passage)
+        void IAutoCompleteProvider.Train(string passage)
         {
             var words = passage.Split(null /* whitespace */)
                                .Where(word => !string.IsNullOrWhiteSpace(word))
