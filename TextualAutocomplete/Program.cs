@@ -1,6 +1,4 @@
 ﻿using System;
-using TextCollections.Standard;
-using TextualAutocomplete.Output;
 
 namespace TextualAutocomplete
 {
