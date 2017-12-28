@@ -13,7 +13,7 @@ namespace TextCollections.Standard
     /// <typeparam name="TValue">The type of values in the trie.</typeparam>
     public class Trie<TValue> : ITrie<TValue>, IDictionary<string, TValue>
     {
-        private readonly TrieNode root;
+        private readonly InternalTrieNode root;
 
         private int count;
 
@@ -23,7 +23,7 @@ namespace TextCollections.Standard
         /// <param name="comparer">Comparer.</param>
         public Trie(IEqualityComparer<char> comparer)
         {
-            root = new TrieNode(char.MinValue, comparer);
+            root = new InternalTrieNode(char.MinValue, comparer);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace TextCollections.Standard
 
             set
             {
-                TrieNode node;
+                InternalTrieNode node;
 
                 if (TryGetNode(key, out node))
                 {
@@ -145,7 +145,8 @@ namespace TextCollections.Standard
 
             if (node.IsTerminal)
             {
-                throw new ArgumentException(string.Format("An element with the same charKey already exists: '{0}'", key), "key");
+                node.IncrementCount(); // throw new ArgumentException(string.Format("An element with the same charKey already exists: '{0}'", key), "key");
+                return;
             }
 
             SetTerminalNode(node, value);
@@ -168,7 +169,7 @@ namespace TextCollections.Standard
         /// </summary>
         /// <param name="collection">The collection whose elements should be added to the <see cref="Trie{TValue}"/>. The items should have unique keys.</param>
         /// <exception cref="T:System.ArgumentException">An element with the same charKey already exists in the <see cref="Trie{TValue}"/>.</exception>
-        public void AddRange(IEnumerable<TrieNode<TValue>> collection)
+        public void AddRange(IEnumerable<ITrieNode<TValue>> collection)
         {
             foreach (var item in collection)
             {
@@ -249,7 +250,7 @@ namespace TextCollections.Standard
                 throw new ArgumentNullException("key");
             }
 
-            TrieNode node;
+            InternalTrieNode node;
 
             if (!TryGetNode(key, out node))
             {
@@ -282,7 +283,7 @@ namespace TextCollections.Standard
                 throw new ArgumentNullException("key");
             }
 
-            TrieNode node;
+            InternalTrieNode node;
             value = default(TValue);
 
             if (!TryGetNode(key, out node))
@@ -307,7 +308,7 @@ namespace TextCollections.Standard
 
         bool ICollection<KeyValuePair<string, TValue>>.Contains(KeyValuePair<string, TValue> item)
         {
-            TrieNode node;
+            InternalTrieNode node;
 
             if (!TryGetNode(item.Key, out node))
             {
@@ -329,7 +330,7 @@ namespace TextCollections.Standard
 
         bool ICollection<KeyValuePair<string, TValue>>.Remove(KeyValuePair<string, TValue> item)
         {
-            TrieNode node;
+            InternalTrieNode node;
 
             if (!TryGetNode(item.Key, out node))
             {
@@ -351,24 +352,24 @@ namespace TextCollections.Standard
             return true;
         }
 
-        private static void SetTerminalNode(TrieNode node, TValue value)
+        private static void SetTerminalNode(InternalTrieNode node, TValue value)
         {
             node.IsTerminal = true;
             node.Value = value;
         }
 
-        private IEnumerable<TrieNode> GetAllNodes()
+        private IEnumerable<InternalTrieNode> GetAllNodes()
         {
             return root.GetAllNodes();
         }
 
-        private void RemoveNode(TrieNode node)
+        private void RemoveNode(InternalTrieNode node)
         {
             node.Remove();
             count--;
         }
 
-        private bool TryGetNode(string key, out TrieNode node)
+        private bool TryGetNode(string key, out InternalTrieNode node)
         {
             node = root;
 
@@ -386,19 +387,23 @@ namespace TextCollections.Standard
         /// <summary>
         /// <see cref="Trie{TValue}"/>'s node.
         /// </summary>
-        private sealed class TrieNode
+        private sealed class InternalTrieNode
         {
-            private readonly Dictionary<char, TrieNode> children;
+            private readonly Dictionary<char, InternalTrieNode> children;
 
             private readonly IEqualityComparer<char> comparer;
 
             private readonly char keyChar;
 
-            internal TrieNode(char keyChar, IEqualityComparer<char> comparer)
+            private int _Count = 1;
+            public int Count => _Count;
+            public int IncrementCount() => _Count += 1;
+
+            internal InternalTrieNode(char keyChar, IEqualityComparer<char> comparer)
             {
                 this.keyChar = keyChar;
                 this.comparer = comparer;
-                children = new Dictionary<char, TrieNode>(comparer);
+                children = new Dictionary<char, InternalTrieNode>(comparer);
             }
 
             internal bool IsTerminal { get; set; }
@@ -406,22 +411,11 @@ namespace TextCollections.Standard
             internal string Key
             {
                 get
-                {
-                    ////var result = new StringBuilder().Append(keyChar);
-
-                    ////TrieNode node = this;
-
-                    ////while ((node = node.Parent).Parent != null)
-                    ////{
-                    ////    result.Insert(0, node.keyChar);
-                    ////}
-
-                    ////return result.ToString();
-                    
+                {                    
                     var stack = new Stack<char>();
                     stack.Push(keyChar);
 
-                    TrieNode node = this;
+                    InternalTrieNode node = this;
 
                     while ((node = node.Parent).Parent != null)
                     {
@@ -434,15 +428,15 @@ namespace TextCollections.Standard
 
             internal TValue Value { get; set; }
 
-            private TrieNode Parent { get; set; }
+            private InternalTrieNode Parent { get; set; }
 
-            internal TrieNode Add(char key)
+            internal InternalTrieNode Add(char key)
             {
-                TrieNode childNode;
+                InternalTrieNode childNode;
 
                 if (!children.TryGetValue(key, out childNode))
                 {
-                    childNode = new TrieNode(key, comparer)
+                    childNode = new InternalTrieNode(key, comparer)
                                     {
                                         Parent = this
                                     };
@@ -458,7 +452,7 @@ namespace TextCollections.Standard
                 children.Clear();
             }
 
-            internal IEnumerable<TrieNode> GetAllNodes()
+            internal IEnumerable<InternalTrieNode> GetAllNodes()
             {
                 foreach (var child in children)
                 {
@@ -481,7 +475,7 @@ namespace TextCollections.Standard
             {
                 if (IsTerminal)
                 {
-                    yield return new TrieNode<TValue>(Key, Value);
+                    yield return new TrieNode<TValue>(Key, Value, Count);
                 }
 
                 foreach (var item in children)
@@ -508,7 +502,7 @@ namespace TextCollections.Standard
                 }
             }
 
-            internal bool TryGetNode(char key, out TrieNode node)
+            internal bool TryGetNode(char key, out InternalTrieNode node)
             {
                 return children.TryGetValue(key, out node);
             }

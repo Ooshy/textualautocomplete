@@ -5,6 +5,14 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
 
+
+  <ItemGroup>
+    <Compile Remove="AutoCompleteFormatter.cs" />
+    <Compile Remove="AutoCompleteProvider.cs" />
+    <Compile Remove="Output\Formatter.cs" />
+    <Compile Remove="Output\IOutput.cs" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\TextCollections.ITrie\TextCollections.ITrie.csproj" />
     <ProjectReference Include="..\TextCollections.Trie\TextCollections.Trie.csproj" />

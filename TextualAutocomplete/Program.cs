@@ -1,6 +1,6 @@
 ﻿using System;
-using TextCollections.ITrie;
 using TextCollections.Standard;
+using TextualAutocomplete.Output;
 
 namespace TextualAutocomplete
 {
@@ -8,22 +8,21 @@ namespace TextualAutocomplete
     {
         static void Main(string[] args)
         {
-            ITrie<string> autocomplete = new Trie<string>();
-            autocomplete.GetByPrefix("blah");
+            var provider = new AutoCompleteProvider(new Trie<string>()); // inject trie implementation
 
-            string input = "";
+            var textFormatter = new TextFormatter();
+
+            var processor = new CommandProcessor(provider, new CommandLineOutput(), textFormatter); // inject command-line output / formatters
+
             for (;;)
             {
-                input = Console.ReadLine();
-                switch(input)
-                {
-                    default:
-                        Console.WriteLine("Invalid command. Please enter a valid command.");
-                        break;
-                }
-
-                Console.ReadKey();
+                var input = Console.ReadLine();
+                bool @continue = processor.Process(input);
+                if (!@continue)
+                    break;
             }
+
+            Console.WriteLine("Have a nice day.");
         }
     }
 }

@@ -14,11 +14,12 @@ namespace TextCollections.ITrie
         /// </summary>
         /// <param name="key">The <see cref="string"/> object defined in each key/value pair.</param>
         /// <param name="value">The definition associated with key.</param>
-        public TrieNode(string key, TValue value)
+        public TrieNode(string key, TValue value, int count = 1)
             : this()
         {
             Key = key;
             Value = value;
+            Count = count;
         }
 
         /// <summary>
@@ -30,6 +31,11 @@ namespace TextCollections.ITrie
         /// Gets the value in the key/value pair.
         /// </summary>
         public TValue Value { get; private set; }
+
+        /// <summary>
+        /// Gets the number of occurences of the key/value pair.
+        /// </summary>
+        public int Count { get; }
 
         /// <summary>
         /// Returns the fully qualified type name of this instance.

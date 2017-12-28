@@ -15,5 +15,10 @@ namespace TextCollections.ITrie
         /// Gets the value in the key/value pair.
         /// </summary>
         TValue Value { get; }
+
+        /// <summary>
+        /// Gets the number of occurences of the key/value pair.
+        /// </summary>
+        int Count { get; }
     }
 }
