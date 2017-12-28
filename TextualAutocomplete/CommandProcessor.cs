@@ -37,7 +37,7 @@ namespace TextualAutocomplete
 
             if (input.StartsWith(TextCommands.Train, StringComparison.CurrentCultureIgnoreCase))
             {
-                var passage = input.Substring(TextCommands.Train.Length).ToLowerInvariant();
+                var passage = input.Substring(TextCommands.Train.Length).Trim().ToLowerInvariant();
                 _Provider.Train(passage);
                 _Output.WriteLine(_Formatter.FormatTraining(passage));
             }
