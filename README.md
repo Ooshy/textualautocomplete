@@ -4,8 +4,8 @@
 
 Textual Auto-Complete is an efficient, tiny library for auto-completing words.
 
-  - Read training data (words, sentences, etc.)
-  - Predictions with confidences
+  - Read training data (words, sentences, etc.) into trie data-structure
+  - Ordered predictions with confidence values
   - Magic
 
 __Summary__  
