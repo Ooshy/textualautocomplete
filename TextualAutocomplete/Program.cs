@@ -14,8 +14,8 @@ namespace TextualAutocomplete
 
             var processor = new CommandProcessor(); // inject command-line output / formatters
 
-            processor.Process("train: training data to train for training");
-            processor.Process("input: train");
+            //processor.Process("train: training data to train for training");
+            //processor.Process("input: train");
 
             for (;;)
             {
