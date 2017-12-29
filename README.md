@@ -20,14 +20,13 @@ input: train
 #Input: "train" --> "training" (2), "train" (1)
 ```
 
-__C# Example (Not Implemented For Consumption, Yet)__
+__C# Example
 
 ```csharp
-var processor = new CommandProcessor();
-processor.Process("train: training data to train for training");
-// Train:  training data to train for training
-processor.Process("input: train");
-// Input: "train" --> "training" (2), "train" (1)
+var provider = new AutoCompleteProvider(new Trie<string>(), new TrieNodeFactory<string>());
+provider.Train("The third thing that I need to tell you is that this thing does not think thoroughly.");
+var words = provider.GetWords("thi");
+// {"thing"(2), "think"(1), "third"(1), "this"(1)}
 ```
 
 __Build Instructions__  
