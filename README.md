@@ -20,7 +20,7 @@ input: train
 #Input: "train" --> "training" (2), "train" (1)
 ```
 
-__C# Example
+__C# Example__
 
 ```csharp
 var provider = new AutoCompleteProvider(new Trie<string>(), new TrieNodeFactory<string>());
