@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextCollections.Trie", "Tex
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextCollections.ITrie", "TextCollections.ITrie\TextCollections.ITrie.csproj", "{79B0C7F8-C62F-4A37-A001-CC67850BF137}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.AutoComplete", "Common.AutoComplete\Common.AutoComplete.csproj", "{D4EF9B33-28CA-41AE-93BF-54D2C56F450D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.AutoComplete", "Common.AutoComplete\Common.AutoComplete.csproj", "{D4EF9B33-28CA-41AE-93BF-54D2C56F450D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.IAutoComplete", "Common.IAutoComplete\Common.IAutoComplete.csproj", "{72796BB4-E52D-44F7-B724-18A2EC4D3C5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.IAutoComplete", "Common.IAutoComplete\Common.IAutoComplete.csproj", "{72796BB4-E52D-44F7-B724-18A2EC4D3C5C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.AutoComplete.Test", "Common.AutoComplete.Test\Common.AutoComplete.Test.csproj", "{6B9EF5CC-AAE7-4BD6-86E5-941C57C65593}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{72796BB4-E52D-44F7-B724-18A2EC4D3C5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72796BB4-E52D-44F7-B724-18A2EC4D3C5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72796BB4-E52D-44F7-B724-18A2EC4D3C5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B9EF5CC-AAE7-4BD6-86E5-941C57C65593}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B9EF5CC-AAE7-4BD6-86E5-941C57C65593}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B9EF5CC-AAE7-4BD6-86E5-941C57C65593}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B9EF5CC-AAE7-4BD6-86E5-941C57C65593}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

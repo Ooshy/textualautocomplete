@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>CRZ.AutoComplete</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Auto-Complete with Trie implementation. Continually load training data to enhance predictions.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>autocomplete trie text search csharp dotnetcore</tags>
+    <dependencies>
+      <dependency id="CRZ.TextCollections.ITrie" version="[1.0)" />
+      <dependency id="CRZ.TextCollections.Trie" version="[1.0)" />
+    </dependencies>
+  </metadata>
+</package>

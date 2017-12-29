@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>CRZ.TextCollections.ITrie</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Trie interface.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>trie text search csharp dotnetcore</tags>
+  </metadata>
+</package>

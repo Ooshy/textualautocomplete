@@ -34,19 +34,24 @@ namespace TextualAutocomplete
         /// Words to train the auto-complete engine on.
         /// </summary>
         /// <param name="passage">text that is processed to enhance predictions.</param>
-        void IAutoCompleteProvider.Train(string passage)
+        public void Train(string passage)
         {
+            passage = _RemovePunctuation(passage); // remove punctuation from each word
             var words = passage.Split(null /* whitespace */)
                                .Where(word => !string.IsNullOrWhiteSpace(word))
                                .Select(word =>
                                {
-                                   var removedPunctuation = Regex.Replace(word, "\\p{P}+", ""); // remove punctuation from each word
-                                   var trimmed = removedPunctuation.Trim();
-                                   return _NodeFactory.CreateNode(trimmed, trimmed);
+                                   var trimmed = word.Trim();
+                                   var lowercased = trimmed.ToLowerInvariant();
+                                   return _NodeFactory.CreateNode(lowercased, lowercased);
                                });
 
             _Trie.AddRange(words);
         }
 
+        private static string _RemovePunctuation(string passage)
+        {
+            return Regex.Replace(passage, "\\p{P}+", "");
+        }
     }
 }
