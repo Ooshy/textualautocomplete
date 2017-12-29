@@ -7,7 +7,7 @@ namespace TextCollections.ITrie
     /// <summary>
     /// Defines a key/value pair that can be set or retrieved from <see cref="Trie{TValue}"/>.
     /// </summary>
-    public struct TrieNode<TValue> : ITrieNode<TValue>
+    public struct TrieNode<TValue> : INode<TValue>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TrieNode{TValue}"/> structure with the specified key and value.

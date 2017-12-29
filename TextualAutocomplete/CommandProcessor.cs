@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Common.IAutoComplete;
+using System;
 using TextCollections.Standard;
+using TextCollections.Trie;
 using TextualAutocomplete.Output;
 
 namespace TextualAutocomplete
@@ -18,7 +20,7 @@ namespace TextualAutocomplete
         /// <param name="formatter"></param>
         public TextProcessor(IAutoCompleteProvider provider = null, IOutput output = null, IFormatter formatter = null)
         {
-            _Provider = provider ?? new AutoCompleteProvider(new Trie<string>());
+            _Provider = provider ?? new AutoCompleteProvider(new Trie<string>(), new TrieNodeFactory<string>());
             _Output = output ?? new CommandLineOutput();
             _Formatter = formatter ?? new TextFormatter();
         }

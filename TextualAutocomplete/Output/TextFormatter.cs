@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
-using Candidates = System.Collections.Generic.IEnumerable<TextualAutocomplete.Candidate>;
+using Candidates = System.Collections.Generic.IEnumerable<Common.IAutoComplete.ICandidate>;
 
 namespace TextualAutocomplete.Output
 {

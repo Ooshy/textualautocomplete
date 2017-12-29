@@ -169,7 +169,7 @@ namespace TextCollections.Standard
         /// </summary>
         /// <param name="collection">The collection whose elements should be added to the <see cref="Trie{TValue}"/>. The items should have unique keys.</param>
         /// <exception cref="T:System.ArgumentException">An element with the same charKey already exists in the <see cref="Trie{TValue}"/>.</exception>
-        public void AddRange(IEnumerable<ITrieNode<TValue>> collection)
+        public void AddRange(IEnumerable<INode<TValue>> collection)
         {
             foreach (var item in collection)
             {
@@ -207,7 +207,7 @@ namespace TextCollections.Standard
         /// </summary>
         /// <param name="prefix">Key prefix.</param>
         /// <returns>Collection of <see cref="TrieNode{TValue}"/> items which have key with specified key.</returns>
-        public IEnumerable<ITrieNode<TValue>> GetByPrefix(string prefix)
+        public IEnumerable<INode<TValue>> GetByPrefix(string prefix)
         {
             var node = root;
 
@@ -215,7 +215,7 @@ namespace TextCollections.Standard
             {
                 if (!node.TryGetNode(item, out node))
                 {
-                    return Enumerable.Empty<ITrieNode<TValue>>();
+                    return Enumerable.Empty<INode<TValue>>();
                 }
             }
 
@@ -471,7 +471,7 @@ namespace TextCollections.Standard
                 }
             }
 
-            internal IEnumerable<ITrieNode<TValue>> GetByPrefix()
+            internal IEnumerable<INode<TValue>> GetByPrefix()
             {
                 if (IsTerminal)
                 {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.IAutoComplete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -6,33 +7,33 @@ using TextCollections.ITrie;
 
 namespace TextualAutocomplete
 {
- 
-
     public class AutoCompleteProvider : IAutoCompleteProvider
     {
-        private readonly ITrie<string> _Storage;
-
-        public AutoCompleteProvider(ITrie<string> trie = null)
+        private readonly ITrie<string> _Trie;
+        private readonly INodeFactory<string> _NodeFactory;
+        public AutoCompleteProvider(ITrie<string> trie, INodeFactory<string> nodeFactory)
         {
-            if ((_Storage = trie) == null)
+            if ((_Trie = trie) == null)
                 throw new ArgumentNullException($"{nameof(trie)} is null.");
+            if ((_NodeFactory = nodeFactory) == null)
+                throw new ArgumentNullException($"{nameof(nodeFactory)} is null.");
         }
 
         /// <summary>
         /// Returns a list of auto-complete matches and partial matches.
         /// </summary>
-        /// <param name="fragment">the prefix of the word to search for. will be trimmed</param>
+        /// <param name="fragment">the prefix of the word to search for.</param>
         /// <returns></returns>
-        IList<Candidate> IAutoCompleteProvider.GetWords(string fragment)
+        public IList<ICandidate> GetWords(string fragment)
         {
-            return _Storage.GetByPrefix(fragment).Select(word => new Candidate(word.Value, word.Count)).ToList();
+            return _Trie.GetByPrefix(fragment).Select(word => (ICandidate)new Candidate(word.Value, word.Count)).ToList();
         }
 
 
         /// <summary>
         /// Words to train the auto-complete engine on.
         /// </summary>
-        /// <param name="passage"></param>
+        /// <param name="passage">text that is processed to enhance predictions.</param>
         void IAutoCompleteProvider.Train(string passage)
         {
             var words = passage.Split(null /* whitespace */)
@@ -41,10 +42,10 @@ namespace TextualAutocomplete
                                {
                                    var removedPunctuation = Regex.Replace(word, "\\p{P}+", ""); // remove punctuation from each word
                                    var trimmed = removedPunctuation.Trim();
-                                   return (ITrieNode<string>)(new TrieNode<string>(trimmed, trimmed));
+                                   return _NodeFactory.CreateNode(trimmed, trimmed);
                                });
 
-            _Storage.AddRange(words);
+            _Trie.AddRange(words);
         }
 
     }

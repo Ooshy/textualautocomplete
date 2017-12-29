@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Common.IAutoComplete;
+using System;
 //using TCandidates = System.Collections.Generic.IEnumerable<TextCollections.ITrie.ITrieNode<string>>;
 
 namespace TextualAutocomplete
 {
-    public class Candidate
+    public class Candidate : ICandidate
     {
         public string Word { get; }
 

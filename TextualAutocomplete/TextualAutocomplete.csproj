@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common.AutoComplete\Common.AutoComplete.csproj" />
     <ProjectReference Include="..\TextCollections.ITrie\TextCollections.ITrie.csproj" />
     <ProjectReference Include="..\TextCollections.Trie\TextCollections.Trie.csproj" />
   </ItemGroup>
