@@ -6,17 +6,13 @@ using TextCollections.ITrie;
 
 namespace TextualAutocomplete
 {
-    internal interface IAutoCompleteProvider
-    {
-        IList<Candidate> GetWords(string fragment);
-        void Train(string passage);
-    }
+ 
 
-    internal class AutoCompleteProvider : IAutoCompleteProvider
+    public class AutoCompleteProvider : IAutoCompleteProvider
     {
         private readonly ITrie<string> _Storage;
 
-        internal AutoCompleteProvider(ITrie<string> trie = null)
+        public AutoCompleteProvider(ITrie<string> trie = null)
         {
             if ((_Storage = trie) == null)
                 throw new ArgumentNullException($"{nameof(trie)} is null.");
