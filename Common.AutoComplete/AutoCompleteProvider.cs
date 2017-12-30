@@ -34,6 +34,15 @@ namespace TextualAutocomplete
         /// Words to train the auto-complete engine on.
         /// </summary>
         /// <param name="passage">text that is processed to enhance predictions.</param>
+        public void Train(string passage)
+        {
+            Train(passage, true);
+        }
+        /// <summary>
+        /// Words to train the auto-complete engine on.
+        /// </summary>
+        /// <param name="passage">text that is processed to enhance predictions.</param>
+        /// <param name="removePunctuation">removes punctuation before processing</param>
         public void Train(string passage, bool removePunctuation = true)
         {
             if (removePunctuation)
