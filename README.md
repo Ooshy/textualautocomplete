@@ -2,6 +2,8 @@
 ![alt text](https://blairleduc.gallerycdn.vsassets.io/extensions/blairleduc/net-core-starters-pack/1.0.0/1510457372304/Microsoft.VisualStudio.Services.Icons.Default "dot net core logo")
 .NET Core App 1.1  
 
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg)](https://travis-ci.org/Ooshy/textualautocomplete/)
+
 Textual Auto-Complete is an efficient, tiny library for auto-completing words.
 
   - Read training data (words, sentences, etc.) into trie data-structure
