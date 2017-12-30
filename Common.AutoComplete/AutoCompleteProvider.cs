@@ -34,9 +34,11 @@ namespace TextualAutocomplete
         /// Words to train the auto-complete engine on.
         /// </summary>
         /// <param name="passage">text that is processed to enhance predictions.</param>
-        public void Train(string passage)
+        public void Train(string passage, bool removePunctuation = true)
         {
-            passage = _RemovePunctuation(passage); // remove punctuation from each word
+            if (removePunctuation)
+                passage = _RemovePunctuation(passage);    
+
             var words = passage.Split(null /* whitespace */)
                                .Where(word => !string.IsNullOrWhiteSpace(word))
                                .Select(word =>
