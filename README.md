@@ -13,23 +13,19 @@ Textual Auto-Complete is an efficient, tiny library for auto-completing words.
 __Summary__  
 The processor may continue to be trained, indefinitely. Each occurence of a word increments the confidence of the match, making the word have higher priority during auto-completion.
 
-__Command Line Example__
-
-```
-train: training data to train for training
-#Train: training data to train for training
-input: train
-#Input: "train" --> "training" (2), "train" (1)
-```
-
 __C# Example__
 
 ```csharp
-var provider = new AutoCompleteProvider(new Trie<string>(), new TrieNodeFactory<string>());
-provider.Train("The third thing that I need to tell you is that this thing does not think thoroughly.");
-var words = provider.GetWords("thi");
+var ac = new AutoCompleteProvider(new Trie<string>(), new TrieNodeFactory<string>());
+ac.Train("The third thing that I need to tell you is that this thing does not think thoroughly.");
+var words = ac.GetWords("thi");
 // {"thing"(2), "think"(1), "third"(1), "this"(1)}
 ```
 
+__How To Get__  
+From NuGet, via __Common.AutoComplete__ package.
+
 __Build Instructions__  
-On a platform with .NET Core App 1.1 installed, build and run the solution.
+On a platform with .NET Core App 1.1.2 installed, build and run the solution.
+
+Runtime can be downloaded from [here](https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.1.2-download.md).  
