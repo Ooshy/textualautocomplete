@@ -43,18 +43,21 @@ namespace TextualAutocomplete
         /// </summary>
         /// <param name="passage">text that is processed to enhance predictions.</param>
         /// <param name="removePunctuation">removes punctuation before processing</param>
-        public void Train(string passage, bool removePunctuation = true)
+        /// <param name="caseSensitive">predicts words with case sensitivity</param>
+        public void Train(string passage, bool removePunctuation = true, bool caseSensitive = false)
         {
             if (removePunctuation)
-                passage = _RemovePunctuation(passage);    
+                passage = _RemovePunctuation(passage);
 
             var words = passage.Split(null /* whitespace */)
                                .Where(word => !string.IsNullOrWhiteSpace(word))
                                .Select(word =>
                                {
-                                   var trimmed = word.Trim();
-                                   var lowercased = trimmed.ToLowerInvariant();
-                                   return _NodeFactory.CreateNode(lowercased, lowercased);
+                                   var modified = word;
+                                   modified = word.Trim();
+                                   if (!caseSensitive)
+                                       modified = modified.ToLowerInvariant();
+                                   return _NodeFactory.CreateNode(modified, modified);
                                });
 
             _Trie.AddRange(words);
