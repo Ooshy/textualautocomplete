@@ -11,7 +11,7 @@ Textual Auto-Complete is an efficient, tiny library for auto-completing words.
   - Magic
 
 __Summary__  
-The processor may continue to be trained, indefinitely. Each occurence of a word increments the confidence of the match, making the word have higher priority during auto-completion.
+The auto-completer may continue to be trained, indefinitely. Each occurence of a word increments the confidence of the match, making the word have higher priority during auto-completion.
 
 __C# Example__
 
